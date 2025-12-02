@@ -9,7 +9,7 @@ configDotenv();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: [
       "Content-Type",
@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/auth/',authRoutes)
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
