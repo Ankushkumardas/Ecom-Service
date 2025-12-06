@@ -4,6 +4,7 @@ import GenderCollectionSection from '../components/products/GenderCollectionSect
 import NewArrivals from '../components/products/NewArrivals'
 import BestSeller from '../components/layout/BestSeller'
 import ProductDetails from '../components/products/ProductDetails'
+import YouMayLike from '../components/products/YouMayLike'
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
         <h2 className=' text-center text-2xl font-semibold tracking-tighter'>Best Seller</h2>
         <ProductDetails/>
     </div>
-    <BestSeller/>
+    <YouMayLike/>
     </div>
   )
 }
