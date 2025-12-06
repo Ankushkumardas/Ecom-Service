@@ -5,7 +5,7 @@ import Navbar from '../common/Navbar'
 
 const UserLayout = () => {
   return (
-    <div>
+    <div className=''>
         <Navbar/>
         <Outlet/>
         <Footer/>
