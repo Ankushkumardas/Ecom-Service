@@ -6,7 +6,7 @@ const Cartdrawer = ({ handleToggle, cartopen }) => {
         handleToggle()
     }
     return (
-        <div className={`fixed top-0 right-0 w-1/3 sm:1/3 md:1/4  h-full bg-slate-100 shadow transition-transform transform duration-200 flex flex-col z-50 ${cartopen ? "translate-x-0" : "translate-x-full"}`}>
+        <div className={`fixed top-0 right-0 w-1/2 sm:1/2 md:1/4 lg:w-1/4  h-full bg-slate-100 shadow transition-transform transform duration-200 flex flex-col z-90 ${cartopen ? "translate-x-0" : "translate-x-full"}`}>
             <button onClick={handlechange} className=' cursor-pointer flex justify-end p-2'>x</button>
             <div className='px-2 overflow-y-auto grow-1'>
                 Cart Content
