@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'sonner';
+import ProductGrid from './ProductGrid';
 
 const ProductDetails = () => {
     const product = {
@@ -15,7 +16,33 @@ const ProductDetails = () => {
             { url: "https://picsum.photos/200?random=2", alt: "asck" },
             { url: "https://picsum.photos/200?random=14", alt: "ascsack" }
         ]
-    }
+    };
+    const similarproducts = [
+        {
+            _id: 3,
+            name: "Leather Boots",
+            price: 89,
+            images: { url: "https://picsum.photos/200?random=3" }
+        },
+        {
+            _id: 4,
+            name: "Summer Dress",
+            price: 45,
+            images: { url: "https://picsum.photos/200?random=4" }
+        },
+        {
+            _id: 5,
+            name: "Wool Scarf",
+            price: 19,
+            images: { url: "https://picsum.photos/200?random=5" }
+        },
+        {
+            _id: 6,
+            name: "Sneakers",
+            price: 49,
+            images: { url: "https://picsum.photos/200?random=6" }
+        }
+    ];
     const [mainimage, setmainimage] = useState("");
     const [size, setsize] = useState("");
     const [selectcolor, setselectcolor] = useState("");
@@ -97,6 +124,13 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <button className=' bg-black text-white px-2 py-1 rounded-md mt-2 tracking-tight' onClick={handleaddtocart} disabled={disablebutton} >{disablebutton ? "Adding To Cart" : "Add to cart"}</button>
+                </div>
+            </div>
+            {/*  */}
+            <div className=' my-20'>
+                <h2 className=' text-center tracking-tighter text-4xl font-semibold'>You may also like</h2>
+                <div>
+                    <ProductGrid products={similarproducts}/>
                 </div>
             </div>
         </div>
