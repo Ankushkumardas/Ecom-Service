@@ -11,8 +11,8 @@ const Login = () => {
     }
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white shadow-lg rounded-lg flex w-full max-w-3xl overflow-hidden">
-                <div className="w-1/2 p-10 flex flex-col justify-center">
+           
+                <div className="max-w-[500px] p-10 flex flex-col justify-center border border-slate-300 shadow  rounded-md">
                     <h2 className="text-center font-bold text-3xl mb-8 text-gray-800">Welcome Back</h2>
                     <form onSubmit={handlesubmit} className="space-y-6">
                         <div>
@@ -58,10 +58,7 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
-                <div className="w-1/2 bg-blue-50  items-center justify-center hidden md:flex">
-                    <span className="text-4xl text-blue-400 font-extrabold">csac</span>
-                </div>
-            </div>
+               
         </div>
     )
 }
