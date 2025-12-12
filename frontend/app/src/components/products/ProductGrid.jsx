@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const ProductGrid = ({ products }) => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 space-y-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 space-y-10 '>
             {products && products.length > 0 ? products.map((a, i) => (
                 <Link key={a._id || i} to={`/product/${a._id}`} className='block'>
-                    <div className='w-full h-96 flex items-center flex-col justify-center bg-white'>
+                    <div className='w-[70%] h-auto flex items-center flex-col justify-center bg-white mx-auto'>
                         <img
                             src={a.images?.url || 'https://via.placeholder.com/300x400?text=No+Image'}
                             alt={a.name || 'Product Image'}

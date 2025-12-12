@@ -1,7 +1,9 @@
-import React from 'react'
+import { Eye } from 'lucide-react';
+import React, { useState } from 'react'
+import { Link } from 'react-router';
 
 const Register = () => {
-   const [data, setdata] = useState({ email: "", password: "" })
+   const [data, setdata] = useState({ email: "", password: "",name:"" })
     const [pass, showpass] = useState(false);
     const handlesubmit = (e) => {
         e.preventDefault();
@@ -10,9 +12,20 @@ const Register = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
            
-                <div className="max-w-[500px] p-10 flex flex-col justify-center border border-slate-300 shadow  rounded-md">
+                <div className="min-w-[350px] p-7 flex flex-col justify-center border border-slate-300 shadow  rounded-md">
                     <h2 className="text-center font-bold text-3xl mb-8 text-gray-800">Welcome Back</h2>
                     <form onSubmit={handlesubmit} className="space-y-6">
+                      <div>
+                            <label className="block text-gray-700 mb-2">Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Name"
+                                value={data.name}
+                                onChange={e => setdata({ ...data, name: e.target.value })}
+                                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            />
+                        </div>
                         <div>
                             <label className="block text-gray-700 mb-2">Email</label>
                             <input
@@ -52,7 +65,7 @@ const Register = () => {
                             </button>
                         </div>
                         <div className=' flex items-center justify-center gap-1'>
-                            <p>Do Not have an account?</p> <span><Link to={'/register'} className=' text-blue-500'>Register</Link></span>
+                            <p>Already have an account?</p> <span><Link to={'/login'} className=' text-blue-500'>Login</Link></span>
                         </div>
                     </form>
                 </div>

@@ -20,8 +20,8 @@ const Navbar = () => {
                     <Link to="/">{"Home"}</Link>
                 </div>
                 <div className=' hidden md:flex space-x-2 '>
-                    <Link className=' uppercase font-semibold'>Men</Link>
-                    <Link className=' uppercase font-semibold'>Women</Link>
+                    <Link className=' uppercase font-semibold' to={'/collections/all'}>Men</Link>
+                    <Link className=' uppercase font-semibold' to={'/collections/women'}>Women</Link>
                     <Link className=' uppercase font-semibold'>TopWear</Link>
                     <Link className=' uppercase font-semibold'>bottomwear</Link>
                 </div>

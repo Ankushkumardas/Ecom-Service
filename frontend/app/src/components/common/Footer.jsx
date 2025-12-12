@@ -6,8 +6,8 @@ const Footer = () => {
 
   }
   return (
-    <div className=' container mx-auto '>
-      <div className=' grid grid-cols-1 md:grid-cols-4 space-y-3 mt-20'>
+    <div className=' '>
+      <div className=' grid grid-cols-1 md:grid-cols-4 space-y-3  border-t border-slate-200  p-4'>
         <div className='space-y-2'>
           <p>NewsLetter</p>
           <p className=' text-slate-500'>
