@@ -12,7 +12,6 @@ const CollectionPage = () => {
     }
     const handleclickoutside=(e)=>{
         if (sidebar.current && !sidebar.current.contains(e.target)) {
-            console.log(sidebar.current)
             setissidebaropen(false)
         }
     }
@@ -251,7 +250,7 @@ const CollectionPage = () => {
                 <FilterSidebar issidebaropen={issidebaropen} setissidebaropen={setissidebaropen}/>
             </div>
             {/*  */}
-            <div className=' flex-grow p-4'>
+            <div className=' flex-grow p-4 overflow-y-scroll  h-screen'>
                 <h2>All Collections</h2>
                 <div>
                     {/* sort options */}
