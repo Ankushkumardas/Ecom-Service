@@ -1,9 +1,15 @@
 import React from 'react'
 import CartContent from '../cart/CartContent'
+import { useNavigate } from 'react-router'
 
 const Cartdrawer = ({ handleToggle, cartopen }) => {
+    const navigate=useNavigate();
     const handlechange = () => {
         handleToggle()
+    }
+
+    const handlecheckout=()=>{
+        navigate('/checkout')
     }
     return (
         <div className={`fixed top-0 right-0 w-1/2 sm:1/2 md:1/4 lg:w-1/4  h-full bg-slate-100 shadow transition-transform transform duration-200 flex flex-col z-90 ${cartopen ? "translate-x-0" : "translate-x-full"}`}>
@@ -13,7 +19,7 @@ const Cartdrawer = ({ handleToggle, cartopen }) => {
                 <CartContent/>
             </div>
             <div className=' sticky bottom-0'>
-                <button className=' w-full flex items-center justify-center bg-blue-500 text-white py-2 '>Checkout</button>
+                <button className=' w-full flex items-center justify-center bg-blue-500 text-white py-2 '  onClick={handlecheckout}>Checkout</button>
             </div>
         </div>
     )

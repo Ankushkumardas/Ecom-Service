@@ -22,6 +22,7 @@ const CollectionPage = () => {
             document.removeEventListener('mousedown',handleclickoutside);
         }
     },[])
+    
     const data = [
   {
     _id: 3,

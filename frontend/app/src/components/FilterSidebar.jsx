@@ -25,6 +25,7 @@ const FilterSidebar = ({ setissidebaropen, issidebaropen }) => {
     // Sync filters from URL on mount or URL change
     useEffect(() => {
         const params = Object.fromEntries([...searchParams]);
+        // console.log(params.size.split(","))
         const newFilters = {
             category: params.category || "",
             gender: params.gender || "",

@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 
 const SortOptions = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const handleSortChange = (e) => {
     const newParams = new URLSearchParams(searchParams);
     if (e.target.value) {
@@ -11,6 +12,7 @@ const SortOptions = () => {
     }
     setSearchParams(newParams, { replace: true });
   };
+  
   return (
     <div className='mb-2 flex items-center justify-end'>
       <select
