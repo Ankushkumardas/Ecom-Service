@@ -10,6 +10,7 @@ const Cartdrawer = ({ handleToggle, cartopen }) => {
 
     const handlecheckout=()=>{
         navigate('/checkout')
+        handleToggle()
     }
     return (
         <div className={`fixed top-0 right-0 w-1/2 sm:1/2 md:1/4 lg:w-1/4  h-full bg-slate-100 shadow transition-transform transform duration-200 flex flex-col z-90 ${cartopen ? "translate-x-0" : "translate-x-full"}`}>
