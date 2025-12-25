@@ -1,15 +1,19 @@
-import { configDotenv } from "dotenv";
-import cors from "cors";
 import express from "express";
-import connectdb from "./database/db.js";
+import cors from "cors";
 import cookieParser from "cookie-parser";
-import authRoutes from './routes/authRoutes.js'
+import { configDotenv } from "dotenv";
+
+import connectdb from "./database/db.js";
+import authRoutes from "./routes/authRoutes.js";
+
 configDotenv();
 
 const app = express();
+
 app.use(
   cors({
     origin: "http://localhost:5173",
+    credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: [
       "Content-Type",
@@ -17,16 +21,19 @@ app.use(
       "Cache-Control",
       "Expires",
     ],
-    credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/auth/',authRoutes)
+app.use("/api/auth", authRoutes);
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-  connectdb();
-});
+const PORT = process.env.PORT || 5000;
+
+  app.listen(PORT, () => {
+    connectdb();
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+

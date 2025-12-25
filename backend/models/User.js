@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   username: {
@@ -16,8 +17,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     // required: true,
-    default:'user'
+    enum:["customer","admin"],
+    default:"customer"
   },
-});
+},{timestamps:true});
+
 
 export default mongoose.model("User", userSchema);
