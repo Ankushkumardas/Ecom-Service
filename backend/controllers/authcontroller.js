@@ -117,11 +117,15 @@ export const login = async (req, res) => {
 };
 
 //user profile protected routed and private
-export const profile=async(req,res)=>{
-  res.status(200).json({message:"user profile information",success:true,user:req.user})
-}
+export const profile = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized: No user information found", success: false });
+  }
+  console.log(req.user);
+  res.status(200).json({ message: "user profile information", success: true, user: req.user });
+};
 // logout
-export const logout = async (req, res) => {
+export const logout = async (res) => {
   try {
     return res
       .clearCookie("token")

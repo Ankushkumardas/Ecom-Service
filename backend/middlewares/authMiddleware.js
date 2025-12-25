@@ -23,6 +23,12 @@ export const protect = async (req, res, next) => {
         .json({ message: "Unauthorized user: No token provided", success: false });
     }
 
+    if (!process.env.JWT_SECRET) {
+      return res
+        .status(500)
+        .json({ message: "JWT secret not configured", success: false });
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!decoded) {
@@ -31,8 +37,9 @@ export const protect = async (req, res, next) => {
         .json({ message: "Unauthorized user: Invalid token", success: false });
     }
 
+    // Uncomment and import User model if you want to attach user info to req.user
     // req.user = await User.findById(decoded.user.id).select("-password");
-    req.user=decoded;
+    req.user = decoded;
     next();
   } catch (error) {
     return res
