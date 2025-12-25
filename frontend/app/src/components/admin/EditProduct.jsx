@@ -4,7 +4,9 @@ const EditProduct = () => {
     const [productdata, setproductdata] = useState({
         name: "", description: "", price: 0, countInStock: 0, sku: "", category: "", brand: "", sizes: [], colors: [], collections: "", material: "", gender: "", images: [{
             url: "https://img.freepik.com/premium-photo/man-is-taking-photo-with-camera_337384-178362.jpg?semt=ais_hybrid&w=740&q=80"
-        }, { url: "https://img.freepik.com/premium-photo/man-is-taking-photo-with-camera_337384-178362.jpg?semt=ais_hybrid&w=740&q=80" }]
+        }, { url: "https://img.freepik.com/premium-photo/man-is-taking-photo-with-camera_337384-178362.jpg?semt=ais_hybrid&w=740&q=80" }],image:[{
+            url:"https://img.freepik.com/premium-photo/man-is-taking-photo-with-camera_337384-178362.jpg?semt=ais_hybrid&w=740&q=80"
+        }]
     });
 
     const handlesubmit = (e) => {
