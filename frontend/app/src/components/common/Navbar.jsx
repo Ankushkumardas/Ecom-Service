@@ -27,6 +27,7 @@ const Navbar = () => {
                 </div>
                 <div className=' flex gap-2 '>
                     <Searchbar />
+                    <Link to={`/admin`}>    Admin</Link>
                     <Link to={'/profile'}>Profile</Link>
                     <button className=' relative cursor-pointer z-50 ' onClick={handletoggle}> Cart
                         <span className=' absolute -top-4 px-2 py-1 -ml-2 rounded-full text-xs  bg-red-500 text-white'>2</span>
