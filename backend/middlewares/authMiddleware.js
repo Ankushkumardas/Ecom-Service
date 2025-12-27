@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 // import User from '../models/User';
 
 export const protect = async (req, res, next) => {
@@ -12,15 +12,18 @@ export const protect = async (req, res, next) => {
     // Check for Bearer token in Authorization header
     else if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer ')
+      req.headers.authorization.startsWith("Bearer ")
     ) {
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(" ")[1];
     }
 
     if (!token) {
       return res
         .status(401)
-        .json({ message: "Unauthorized user: No token provided", success: false });
+        .json({
+          message: "Unauthorized user: No token provided",
+          success: false,
+        });
     }
 
     if (!process.env.JWT_SECRET) {
@@ -44,6 +47,27 @@ export const protect = async (req, res, next) => {
   } catch (error) {
     return res
       .status(401)
-      .json({ message: "Unauthorized user: Token verification failed", success: false });
+      .json({
+        message: "Unauthorized user: Token verification failed",
+        success: false,
+      });
+  }
+};
+
+//middleware the check if user is admin
+export const adminCheck = (req, res, next) => {
+  try {
+    if (req.user && req.user.role === "admin") {
+      next();
+    } else {
+      return res
+        .status(400)
+        .json({
+          message: "User cannot crarte products only admin can",
+          success: false,
+        });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
