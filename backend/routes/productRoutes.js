@@ -1,8 +1,8 @@
 import express from "express";
-import Products from "../models/Products";
-import { protect } from "../middlewares/authMiddleware";
+import { protect } from "../middlewares/authMiddleware.js";
+import { postProduct } from "../controllers/productController.js";
 
 const router = express.Router();
 
-router.post('/',protect,)
+router.post('/',protect,postProduct)
 export default router;
