@@ -1,5 +1,20 @@
-import { describe } from "node:test";
 import Products from "../models/Products.js";
+
+
+//best seller products get the product with highest rating as best seller
+export const bestSellerProducts = async (_req, res) => {
+  try {
+    // Fetch products sorted by rating in descending order, limit to top 10
+    const bestSellers = await Products.find().sort({ rating: -1 }).limit(4);
+    return res.status(200).json({
+      message: "Best seller products fetched successfully",
+      data: bestSellers,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error", error: error.message, success: false });
+  }
+};
 
 export const postProduct = async (req, res) => {
   const {
@@ -166,7 +181,7 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {}
 };
 
-//get  products details with optional filtering public route
+//get all products details with optional filtering public route
 export const getProducts = async (req, res) => {
   const {
     collections,
@@ -229,7 +244,7 @@ export const getProducts = async (req, res) => {
       else if (sortBy === "newest") sortOption.createdAt = -1;
       else if (sortBy === "popularity") sortOption.rating = -1;
     }
-console.log(query)
+    // console.log(query)
     const products = await Products.find(query)
       .sort(sortOption)
       .limit(Number(limit) || 0);
@@ -246,3 +261,61 @@ console.log(query)
       .json({ message: "Internal server error", error: error.message });
   }
 };
+
+//get single profuct ddetails over _id
+export const getProduct = async (req, res) => {
+  try {
+    const product = await Products.findById(req.params.id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: "Product not found", success: false });
+    }
+    return res
+      .status(200)
+      .json({ message: "Product details", data: product, success: true });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
+  }
+};
+
+// get similar products based on current product's gender and category and public route
+export const getSimilarProducts = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Products.findById(id);
+    if (!product) {
+      return res
+        .status(400)
+        .json({ message: "product not found", success: false });
+    }
+    const similarProducts = await Products.find({
+      _id: { $ne: id },
+      gender: product.gender,
+      category: product.category,
+    })
+      .sort({ rating: -1 })
+      .limit(4);
+    res.status(200).json({
+      message: "Similar Porducts data over gender and vategry",
+      data: similarProducts,
+      success: true,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internel server error", error, success: false });
+  }
+};
+
+//get product for new-arrival on teh bssis of creation date
+export const getNewProducts=async(req,res)=>{
+  try {
+    const products=await Products.find().sort({createdAt:-1}).limit(10);
+    return res.status(200).json({message:"New arrival products",data:products})
+  } catch (error) {
+    return res.status(500).json({message:"Internel server error",error})
+  }
+}
