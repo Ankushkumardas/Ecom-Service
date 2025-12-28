@@ -22,6 +22,7 @@ const seedData = async () => {
       role: "admin",
     });
 
+    const hashpass=await bcrypt
     const userid = user._id;
 
     const sampleproducts = products.map((data) => {

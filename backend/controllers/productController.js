@@ -1,3 +1,4 @@
+import { describe } from "node:test";
 import Products from "../models/Products.js";
 
 export const postProduct = async (req, res) => {
@@ -165,11 +166,11 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {}
 };
 
-//get  products details with optional filtering
+//get  products details with optional filtering public route
 export const getProducts = async (req, res) => {
   const {
     collections,
-    size,
+    sizes,
     color,
     gender,
     minPrice,
@@ -183,7 +184,9 @@ export const getProducts = async (req, res) => {
   } = req.query;
 
   try {
+    // console.log(req.query);
     let query = {};
+    let sortOption = {}; // Define sortOption here
 
     // Filtering logic
     if (collections && collections.toLowerCase() !== "all") {
@@ -192,20 +195,20 @@ export const getProducts = async (req, res) => {
     if (category && category.toLowerCase() !== "all") {
       query.category = category;
     }
-    if (size && size.toLowerCase() !== "all") {
-      query.sizes = size;
+    if (sizes && sizes.toLowerCase() !== "all") {
+      query.sizes = { $in: sizes.split(",") };
     }
     if (color && color.toLowerCase() !== "all") {
-      query.colors = color;
+      query.colors = { $in: [color] };
     }
     if (gender && gender.toLowerCase() !== "all") {
       query.gender = gender;
     }
     if (material && material.toLowerCase() !== "all") {
-      query.material = material;
+      query.material = { $in: material.split(",") };
     }
     if (brand && brand.toLowerCase() !== "all") {
-      query.brand = brand;
+      query.brand = { $in: brand.split(",") };
     }
     if (minPrice || maxPrice) {
       query.price = {};
@@ -213,26 +216,23 @@ export const getProducts = async (req, res) => {
       if (maxPrice) query.price.$lte = Number(maxPrice);
     }
     if (search) {
-      query.name = { $regex: search, $options: "i" };
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ];
     }
-
-    let productsQuery = Products.find(query);
 
     // Sorting
     if (sortBy) {
-      let sortOption = {};
       if (sortBy === "priceAsc") sortOption.price = 1;
       else if (sortBy === "priceDesc") sortOption.price = -1;
       else if (sortBy === "newest") sortOption.createdAt = -1;
-      productsQuery = productsQuery.sort(sortOption);
+      else if (sortBy === "popularity") sortOption.rating = -1;
     }
-
-    // Limit
-    if (limit) {
-      productsQuery = productsQuery.limit(Number(limit));
-    }
-
-    const products = await productsQuery.exec();
+console.log(query)
+    const products = await Products.find(query)
+      .sort(sortOption)
+      .limit(Number(limit) || 0);
 
     return res.status(200).json({
       message: "Products fetched successfully",
@@ -241,6 +241,8 @@ export const getProducts = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in getProducts:", error);
-    return res.status(500).json({ message: "Internal server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
